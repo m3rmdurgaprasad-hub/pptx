@@ -155,16 +155,10 @@
 
     function showFact(topic) {
       const bubble = document.getElementById(topic + "Fact");
-      bubble.style.display = "block";
+      bubble.style.display = "oval";
       bubble.innerText = facts[topic][counters[topic]];
       counters[topic] = (counters[topic] + 1) % facts[topic].length;
 
-      // Play sound effect for each topic
-      let audio = new Audio();
-      if(topic === 'lightning') audio.src = "https://actions.google.com/sounds/v1/weather/thunder_crack.ogg";
-      if(topic === 'charge') audio.src = "https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg";
-      if(topic === 'static') audio.src = "https://actions.google.com/sounds/v1/cartoon/boing.ogg";
-      audio.play();
     }
 
     // Show Lightning section by default when page loads
