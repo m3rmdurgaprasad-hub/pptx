@@ -3,90 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Shocking World of Electricity</title>
+  <title>My ppt</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f6f9;
-      color: #333;
+      margin: 0; padding: 0;
+      background: #f4f6f9; color: #333;
     }
     header {
       background: linear-gradient(90deg, #0a3d62, #1e90ff);
-      color: white;
-      padding: 40px;
-      text-align: center;
+      color: white; padding: 40px; text-align: center;
     }
     header h1 { margin: 0; font-size: 2.5em; }
     header p { font-size: 1.2em; margin-top: 10px; }
-    .topic-buttons {
-      display: flex; justify-content: center; gap: 20px; margin: 40px 0;
+
+    /* Navigation bar */
+    nav {
+      background: #0a3d62;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 15px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .topic-buttons button {
-      padding: 15px 25px; font-size: 18px; border-radius: 10px;
-      border: none; background-color: #1e90ff; color: white;
-      cursor: pointer; transition: transform 0.2s, background 0.3s;
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.3s;
     }
-    .topic-buttons button:hover { transform: scale(1.05); background-color: #0a3d62; }
-    section { padding: 40px; border-top: 2px solid #ddd; }
-    section h2 { font-size: 2em; margin-bottom: 10px; }
+    nav button:hover { color: #ffd700; }
+
+    section {
+      display: none; /* hidden by default */
+      padding: 40px; border-top: 2px solid #ddd;
+      animation: fadeIn 0.5s ease;
+    }
+    section.active { display: block; }
+
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
     .robot { width: 120px; cursor: pointer; animation: bounce 2s infinite; margin-top: 20px; }
     @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+
     .factBubble {
       background: #fff; border: 2px solid #333; padding: 10px;
-      border-radius: 10px; display: none; max-width: 300px; margin-top: 10px;
+      border-radius: 10px; display: none; max-width: 500px; margin-top: 10px;
     }
-    .animation { margin-top: 20px; height: 150px; }
+
+    /* Animations for visuals */
     .lightning-bolt { width: 4px; height: 100px; background: yellow; margin: auto; animation: flash 0.5s infinite; }
     @keyframes flash { 0%,100%{opacity:0;} 50%{opacity:1;} }
-    .charge { display: flex; justify-content: center; gap: 40px; }
-    .charge div {
-      width: 60px; height: 60px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 30px; color: white;
-    }
-    .positive { background: red; }
-    .negative { background: blue; }
+
+    .charge { display: flex; justify-content: center; gap: 40px; margin-top:20px; }
+    .charge div { width: 60px; height: 60px; border-radius: 50%; display:flex; align-items:center; justify-content:center; font-size:30px; color:white; }
+    .positive { background:red; }
+    .negative { background:blue; }
+
     .balloon { width: 60px; height: 80px; background: purple; border-radius: 50%; margin: auto; animation: wiggle 1s infinite; }
     @keyframes wiggle { 0%,100%{transform:rotate(0deg);} 50%{transform:rotate(10deg);} }
-    /* Atomic structure diagram */
-    .atom-diagram {
-      display: flex; justify-content: center; align-items: center; margin-top: 20px;
-    }
-    .nucleus {
-      width: 80px; height: 80px; background: orange; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;
-    }
-    .electron {
-      width: 20px; height: 20px; background: cyan; border-radius: 50%;
-      position: relative; animation: orbit 4s linear infinite;
-    }
-    @keyframes orbit {
-      0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
-      100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
-    }
+
+    .atom-diagram { display:flex; justify-content:center; align-items:center; margin-top:20px; }
+    .nucleus { width:80px; height:80px; background:orange; border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold; }
+    .electron { width:20px; height:20px; background:cyan; border-radius:50%; position:relative; animation: orbit 4s linear infinite; }
+    @keyframes orbit { 0%{transform:rotate(0deg) translateX(100px) rotate(0deg);} 100%{transform:rotate(360deg) translateX(100px) rotate(-360deg);} }
   </style>
 </head>
 <body>
 
   <header>
     <h1>Some Natural Phenomena</h1>
-    <p>Tap a topic below to explore cool science facts, animations, and interactive robots!</p>
+    <p>Tap a topic.</p>
   </header>
 
-  <div class="topic-buttons">
-    <button onclick="scrollToSection('lightning')">⚡ Lightning</button>
-    <button onclick="scrollToSection('charge')">⚛ Electric Charge</button>
-    <button onclick="scrollToSection('static')">🎈 Static Electricity</button>
-  </div>
+  <!-- Navigation bar -->
+  <nav>
+    <button onclick="showSection('lightning')">⚡ Lightning</button>
+    <button onclick="showSection('charge')">⚛ Electric Charge</button>
+    <button onclick="showSection('static')">🎈 Static Electricity</button>
+  </nav>
 
   <!-- Lightning Section -->
   <section id="lightning">
     <h2>⚡ Lightning</h2>
     <p>Lightning is a natural phenomenon consisting of electrostatic discharges occurring through the atmosphere between two electrically charged regions. One or both regions are within the atmosphere, with the second region sometimes occurring on the ground. Following the lightning, the regions become partially or wholly electrically neutralized.</p>
-    <div class="animation"><div class="lightning-bolt"></div></div>
-    <img src="a.png" class="robot" onclick="showFact('lightning')" alt="Lightning Robot"/>
+    <div class="lightning-bolt"></div>
+    <img src="https://copilot.microsoft.com/th/id/BCO.71261294-c470-48b4-ad11-b38745423a51.png" class="robot" onclick="showFact('lightning')" alt="Lightning Robot"/>
     <div id="lightningFact" class="factBubble"></div>
   </section>
 
@@ -94,22 +101,19 @@
   <section id="charge">
     <h2>⚛ Electric Charge</h2>
     <p>Electric charge is a fundamental physical property of matter that causes it to experience a force when placed in an electromagnetic field. It can be either positive or negative. The elementary charge is the charge carried by a single proton (+1 e) or the magnitude of the charge carried by a single electron (−1 e).</p>
-    <div class="animation charge">
+    <div class="charge">
       <div class="positive">+</div>
       <div class="negative">−</div>
     </div>
-    <img src="b.png" class="robot" onclick="showFact('charge')" alt="Charge Robot"/>
+    <img src="https://copilot.microsoft.com/th/id/BCO.af20f9cc-c7e9-488a-bb17-8bdf0be32a32.png" class="robot" onclick="showFact('charge')" alt="Charge Robot"/>
     <div id="chargeFact" class="factBubble"></div>
 
-    <!-- Atomic Structure Mini-Topic -->
     <h3>🧬 Structure of Atoms</h3>
-    <p>The structure of an atom consists of a central nucleus surrounded by electrons.
-The nucleus contains protons (positively charged) and neutrons (neutral), while electrons (negatively charged) orbit around the nucleus. 
-Most of the atom is empty space, with the nucleus being much smaller than the entire atom. 
-The arrangement of these particles determines the chemical behavior of the atom and its interactions with other atoms.</p>
+    <p>The structure of an atom consists of a central nucleus surrounded by electrons. The nucleus contains protons (positively charged) and neutrons (neutral), while electrons (negatively charged) orbit around the nucleus. Most of the atom is empty space, with the nucleus being much smaller than the entire atom. The arrangement of these particles determines the chemical behavior of the atom and its interactions with other atoms.</p>
     <div class="atom-diagram">
       <div class="nucleus">p⁺ n⁰</div>
       <div class="electron"></div>
+      <div class="electron" style="animation-delay:1s;"></div>
     </div>
   </section>
 
@@ -117,14 +121,15 @@ The arrangement of these particles determines the chemical behavior of the atom 
   <section id="static">
     <h2>🎈 Static Electricity</h2>
     <p>Static electricity occurs when there is an imbalance of electric charges on an object. This imbalance typically arises from friction, which transfers electrons from one material to another. For example, when you rub a balloon on your hair, electrons move from your hair to the balloon, causing the balloon to become negatively charged and your hair to become positively charged.</p>
-    <div class="animation"><div class="balloon"></div></div>
-    <img src="c.png" class="robot" onclick="showFact('static')" alt="Static Robot"/>
+    <div class="balloon"></div>
+    <img src="https://copilot.microsoft.com/th/id/BCO.481750f3-b535-46f7-85ee-ff058994b3e9.png" class="robot" onclick="showFact('static')" alt="Static Robot"/>
     <div id="staticFact" class="factBubble"></div>
   </section>
 
   <script>
-    function scrollToSection(id) {
-      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    function showSection(id) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
     }
 
     const facts = {
@@ -138,7 +143,6 @@ The arrangement of these particles determines the chemical behavior of the atom 
         "Electric charge is conserved — it can't be created or destroyed.",
         "Electrons move to create electric current in circuits.",
         "Atoms are stable when their outer shell is full — that’s why they bond!"
-        "The SI Unit of electric charge is called 'Coulomb'(C) "
       ],
       static: [
         "Rubbing a balloon on hair transfers electrons — making hair stand up!",
@@ -155,13 +159,17 @@ The arrangement of these particles determines the chemical behavior of the atom 
       bubble.innerText = facts[topic][counters[topic]];
       counters[topic] = (counters[topic] + 1) % facts[topic].length;
 
+      // Play sound effect for each topic
       let audio = new Audio();
       if(topic === 'lightning') audio.src = "https://actions.google.com/sounds/v1/weather/thunder_crack.ogg";
       if(topic === 'charge') audio.src = "https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg";
       if(topic === 'static') audio.src = "https://actions.google.com/sounds/v1/cartoon/boing.ogg";
       audio.play();
     }
+
+    // Show Lightning section by default when page loads
+    showSection('lightning');
   </script>
- <p1>@R.M.DurgaPrasad 8A3 || All rights reserved.</p1>
+
 </body>
 </html>
