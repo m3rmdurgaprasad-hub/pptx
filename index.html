@@ -155,7 +155,7 @@
 
     function showFact(topic) {
       const bubble = document.getElementById(topic + "Fact");
-      bubble.style.display = "oval";
+      bubble.style.display = "block";
       bubble.innerText = facts[topic][counters[topic]];
       counters[topic] = (counters[topic] + 1) % facts[topic].length;
 
